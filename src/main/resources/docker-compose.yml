@@ -1,0 +1,21 @@
+version: "3.7"
+name: 'spring-mongo'
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: "mongodb"
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb-data:/data/db
+  springbootdockercompose:
+    image: springbootdockercompose:latest
+    container_name: "springbootdockercompose"
+    depends_on:
+      - mongodb
+    ports:
+      - "9090:8080"
+    links:
+      - mongodb
+volumes:
+  mongodb-data: {}
